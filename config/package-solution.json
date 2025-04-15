@@ -32,6 +32,12 @@
         "id": "493e4ecf-b1f4-4891-9413-443914879e9f",
         "version": "1.0.0.0"
       }
+    ],
+    "webApiPermissionRequests": [
+      {
+        "resource": "LPManager-Backend-App",
+        "scope": "user_impersonation"
+      }
     ]
   },
   "paths": {
