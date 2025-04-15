@@ -20,15 +20,7 @@ export interface Course {
   cid: string;
   coriginalid: number;
   accessUrl: string;
-}
-export interface Course1 {
-  name: string;
-  Complete: boolean,
-  PercentageComplete: number,
-  litmosLearningPathUrl: string,
-  Description: string,
-  Modules: Module[],
-  isOptional?: boolean,
+  coursePercentageComplete: number;
 }
 
 export interface ISpfxOnboardingProps {

@@ -158,8 +158,16 @@ const Onboarding: React.FC<ISpfxOnboardingProps> = (props) => {
   console.log("courses:", trainingData);
 
   // Get unique courses from the training data
-  const uniqueCoursesNames = Array.from(new Set(trainingData.data.map((item: { course: string }) => item.course)));
-
+const uniqueCourses = trainingData.data.reduce((acc: any[], item: { course: string; coursePercentageComplete?: number }) => {
+  const exists = acc.find((i) => i.course === item.course);
+  if (!exists) {
+    acc.push({
+      course: item.course,
+      coursePercentageComplete: item.coursePercentageComplete ?? 0 
+    });
+  }
+  return acc;
+}, []);
 
   return (
     <>{isUserInList && (
@@ -176,22 +184,22 @@ const Onboarding: React.FC<ISpfxOnboardingProps> = (props) => {
             /></div>
 
         )}
-        <div className='flex justify-between items-start w-full'>
+        <div className='flex justify-between items-start w-full text-[#3E2639]'>
 
           {/* Left Side - Title and Courses */}
           <div className="h-[240px] w-[446px] space-y-8 ">
-            <div className="text-black text-2xl font-semibold font-Poppins space-y-2">
+            <div className="text-2xl font-semibold font-Poppins space-y-2">
               <div className="text-2xl font-semibold leading-none m-0 p-0">Your Onboarding Progress </div>
               <div className="text-xl font-medium w-[371px]">Complete these courses to finish your onboarding</div>
 
             </div>
-            <OnboardingListCourses uniqueCoursesNames={uniqueCoursesNames} modules={trainingData} handleTrainingDataClick={(trainingObject: any) => handleTrainingDataClick(trainingObject)} />
+            <OnboardingListCourses uniqueCoursesNames={uniqueCourses} modules={trainingData} handleTrainingDataClick={(trainingObject: any) => handleTrainingDataClick(trainingObject)} />
           </div>
 
           {/* Right Side - Card and ProgressBar */}
           <div className="relative w-[410px] h-[240px]">
             <div className="w-full h-full rounded-lg border-2 border-[#3E2639] flex items-center justify-center">
-              <div className="text-[#3E2639] text-3xl font-bold font-Poppins text-center">{onboardingName}
+              <div className="text-3xl font-bold font-Poppins text-center">{onboardingName}
               </div>
             </div>
             {/* ProgressBar positioned on the corner */}

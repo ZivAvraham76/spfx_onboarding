@@ -25,7 +25,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ PercentageComplete }) => {
                 />
             </svg>
             {/* Progress Percentage Text */}
-            <div className="absolute inset-0 flex items-center justify-center text-xl font-extrabold font-Poppins text-stone-700">
+            <div className="absolute inset-0 flex items-center justify-center text-xl font-extrabold font-Poppins text-[#3E2639]">
                 {PercentageComplete}%
             </div>
         </div>

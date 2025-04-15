@@ -1,9 +1,9 @@
 import * as React from "react";
 // import CourseDescription from "./CourseDescription";
-import ArrowUpRightFromSquare from "./svg/ArrowUpRightFromSquare";
+// import ArrowUpRightFromSquare from "./svg/ArrowUpRightFromSquare";
 import ModulesTable from "./ModulesTable"
 import VlpTitle from "./VlpTitle";
-// import VlpProgress from "./VlpProgress";
+import VlpProgress from "./VlpProgress";
 // import { Course } from "../ISpfxOnboardingProps";
 
 interface SingleCourseProps {
@@ -23,20 +23,20 @@ const SingleCourse: React.FC<SingleCourseProps> = ({ courseData, litmosLearningP
       >
         {/* Course title section */}
         <div className="tablet:w-6/12 flex items-center">
-          <VlpTitle title={courseData.name} />
+          <VlpTitle title={courseData[0].name} />
           {litmosLearningPathUrl && (
             <div className="ml-2.5">
               {/* Display an arrow link if LmsCourseUrl is provided */}
-              <ArrowUpRightFromSquare
+              {/* <ArrowUpRightFromSquare
                 litmosLearningPathUrl={litmosLearningPathUrl}
                 size={5}
-              />
+              /> */}
             </div>
           )}
         </div>
 
         {/* Course progress section */}
-        {/* <VlpProgress coursePercentageComplete={courseData.PercentageComplete} /> */}
+        <VlpProgress coursePercentageComplete={courseData[0].coursePercentageComplete} />
       </div>
 
       {/* Description and Modules Table section */}

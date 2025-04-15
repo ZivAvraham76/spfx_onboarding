@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../../../../assets/dist/tailwind.css';
-import CourseLine from './Card';
+import CourseLine from './CourseLine';
 
 export interface Course {
     id: string;
