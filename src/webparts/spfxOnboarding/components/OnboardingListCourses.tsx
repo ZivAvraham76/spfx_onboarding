@@ -2,6 +2,7 @@ import * as React from 'react';
 import '../../../../assets/dist/tailwind.css';
 import CourseLine from './CourseLine';
 
+
 export interface Course {
     id: string;
     adsm: string;
@@ -25,15 +26,10 @@ interface OnboardingListCoursesProps {
 const OnboardingListCourses: React.FC<OnboardingListCoursesProps> = ({uniqueCoursesNames,handleTrainingDataClick,modules}) => {
 
     return (
-        <div className="space-y-2 max-h-28 overflow-y-auto pr-2 w-[445px]">
+        <div className="scrollbar space-y-2 max-h-28 overflow-y-auto pr-2 w-[445px]
+
+">
             {uniqueCoursesNames.map((course, index) => (
-                // <div
-                //     key={index}
-                //     className="w-full h-8 rounded-md border-2 border-stone-700 flex items-center justify-start text-sm font-medium text-stone-800 pl-4"
-                //     onClick={() => handleTrainingDataClick(course)}
-                // >
-                //     {course}
-                // </div>
                 <CourseLine
                     key={index}
                     course={course}

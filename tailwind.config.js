@@ -6,6 +6,7 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
     ],
+
   theme: {
     screens: {
       mobile: "640px",
@@ -33,6 +34,6 @@ module.exports = {
       75: "75%",
       100: "100%",
     },  },
-  plugins: [],
-}
+},
+plugins: [],
 }

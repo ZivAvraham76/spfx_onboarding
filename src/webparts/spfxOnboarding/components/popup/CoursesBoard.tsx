@@ -3,7 +3,6 @@ import SingleCourse from "./SingleCourse";
 import { forwardRef } from 'react';
 import { Course } from "../ISpfxOnboardingProps";
 // import VlpHeader from "./VlpHeader";
-// import CourseBoard from "./CourseBoard";
 
 interface CourseBoardProps {
     Courses: Course[];
@@ -12,9 +11,6 @@ interface CourseBoardProps {
 }
 
 const CoursesBoard = forwardRef<HTMLDivElement, CourseBoardProps>(({ Courses, handleTrainingDataClick, selectedTraining }, ref) => {
-  console.log("CoursesBoard1 selectedTraining:", selectedTraining);
-  console.log("CoursesBoard1 Courses:", Courses);
-  console.log("accessUrl:", selectedTraining?.accessUrl);
 
 const filteredCourses = Courses.filter(
   (item) => item.course === selectedTraining
@@ -23,10 +19,6 @@ const filteredCourses = Courses.filter(
   const litmosLearningPathUrl = selectedTraining.accessUrl;
   // const VLP_PercentageComplete =   selectedTraining.PercentageComplete;
   // const VLP_NAME = selectedTraining.litmosLearningPathName;
-
-  console.log("selectedTraining:",selectedTraining);
-  console.log("length of courses:",Courses?.length);
-  console.log("CoursesBoard1 Courses:",filteredCourses);
 
   return (
     <div ref={ref} className="h-screen w-full py-10">

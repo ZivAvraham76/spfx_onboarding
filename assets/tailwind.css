@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.scrollbar {
+  scrollbar-color: initial;
+  scrollbar-width: auto;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #E1E1E1;
+  border-radius: 9999px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #6B6A6A;
+  border-radius: 9999px;
+  border: 0px solid transparent;
+  background-clip: content-box;
+}
+
+.scrollbar::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
 @layer base {
   @font-face {
     font-family: "Poppins";
@@ -32,27 +60,7 @@
   }
 }
 
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #f0f2f4 #ffffff;
-}
 
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 10px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #f0f2f4;
-  border-radius: 5px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #ffffff;
-  border-radius: 14px;
-  border: 3px solid #f0f2f4;
-}
 
 * {
   box-sizing: border-box;

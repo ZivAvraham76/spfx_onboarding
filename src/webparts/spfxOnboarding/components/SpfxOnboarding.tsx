@@ -203,7 +203,7 @@ const uniqueCourses = trainingData.data.reduce((acc: any[], item: { course: stri
               </div>
             </div>
             {/* ProgressBar positioned on the corner */}
-            <div className='absolute bottom-0 left-0 -translate-x-1/2 z-10 pt-4 bg-white'>
+            <div className='absolute -translate-x-[44px] -translate-y-[86px] z-10 p-4 bg-white rounded-full'>
               <ProgressBar PercentageComplete={40} />
             </div>
           </div>

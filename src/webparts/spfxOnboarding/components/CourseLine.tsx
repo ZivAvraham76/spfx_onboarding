@@ -12,7 +12,7 @@ const CourseLine: React.FC<CourseLineProps> = ({ course, handleTrainingDataClick
   console.log(course, "courseLine");
   return (
   <div
-  className="w-full h-8 rounded-md border-2 border-[#3E2639] flex items-center justify-between text-sm font-medium text-[#3E2639] px-4"
+  className="w-full h-8 rounded-md border-2 border-[#3E2639] flex items-center justify-between text-sm font-medium text-[#3E2639] px-4 cursor-pointer"
   onClick={() => handleTrainingDataClick(course.course)}
 >
   <div>{course.course}</div>
