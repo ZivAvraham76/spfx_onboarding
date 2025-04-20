@@ -1,5 +1,5 @@
 import * as React from "react";
-// import CourseDescription from "./CourseDescription";
+import CourseDescription from "./CourseDescription";
 // import ArrowUpRightFromSquare from "./svg/ArrowUpRightFromSquare";
 import ModulesTable from "./ModulesTable"
 import VlpTitle from "./VlpTitle";
@@ -23,16 +23,16 @@ const SingleCourse: React.FC<SingleCourseProps> = ({ courseData, litmosLearningP
       >
         {/* Course title section */}
         <div className="tablet:w-6/12 flex items-center">
-          <VlpTitle title={courseData[0].name} />
-          {litmosLearningPathUrl && (
-            <div className="ml-2.5">
+          <VlpTitle title={courseData[0].course} />
+          {/* {litmosLearningPathUrl && (
+            <div className="ml-2.5"> */}
               {/* Display an arrow link if LmsCourseUrl is provided */}
               {/* <ArrowUpRightFromSquare
                 litmosLearningPathUrl={litmosLearningPathUrl}
                 size={5}
               /> */}
-            </div>
-          )}
+            {/* </div>
+          )} */}
         </div>
 
         {/* Course progress section */}
@@ -43,7 +43,8 @@ const SingleCourse: React.FC<SingleCourseProps> = ({ courseData, litmosLearningP
       <div className="">
         <div id="courseDiscriptionContainer" className="">
           {/* Display the course description */}
-          {/* <CourseDescription courseDescription={courseData.Description} /> */}
+          <CourseDescription courseDescription={courseData[0].courseDescription
+} />
         </div>
         <div id="moduleTableContainer" className="">
           {/* Display the modules of the course in a table */}

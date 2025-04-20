@@ -17,23 +17,23 @@ export interface ISpfxOnboardingWebPartProps {
   backend_app_id: string;
 }
 
-interface Course {
-  id: string;
-  adsm: string;
-  name: string;
-  role: string;
-  originalid: number;
-  levelName: string;
-  completed: boolean;
-  course: string;
-  cid: string;
-  coriginalid: number;
-  accessUrl: string;
-}
+// interface Course {
+//   id: string;
+//   adsm: string;
+//   name: string;
+//   role: string;
+//   originalid: number;
+//   levelName: string;
+//   completed: boolean;
+//   course: string;
+//   cid: string;
+//   coriginalid: number;
+//   accessUrl: string;
+// }
 
 export default class SpfxOnboardingWebPart extends BaseClientSideWebPart<ISpfxOnboardingWebPartProps> {
   private Client: AadHttpClient;
-  private trainingData: { data: Course[] };
+  private trainingData: any;
   private onboardingName: string;
 
   public render(): void {
@@ -62,6 +62,7 @@ Loading...
 
           this.onboardingName = onboardingName;
   
+          // const fullUrl = encodeURI(`https://training-tools-portal-stg.checkpoint.com/sp-data/4sp/${onboardingName}`);
           const fullUrl = encodeURI(`http://localhost:3000/sp-data/4sp/${onboardingName}`);
           console.log("📡 Fetching from:", fullUrl);
   
@@ -128,10 +129,11 @@ Loading...
         if (!currentUser?.UserPrincipalName || !item.field_2) return false;
         const userPrefix = currentUser.UserPrincipalName.split('@')[0].toLowerCase();
         const itemPrefix = item.field_2.split('@')[0].toLowerCase();
-        console.log("matched?", matched)
+        console.log("userPrefix:", userPrefix);
+        console.log("itemPrefix:", itemPrefix);
+  
         return userPrefix === itemPrefix;
       });
-      console.log("test:",matched)
 
       return matched?.field_17 || null;
 

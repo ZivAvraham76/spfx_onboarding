@@ -7,7 +7,7 @@ interface ProgressBarProps {
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ PercentageComplete }) => {
     return (
-        <div className="relative w-20 h-20 flex items-center justify-center rounded-full">
+        <div className="relative w-20 h-20 flex items-center justify-center">
             <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
                 {/* Background Circle */}
                 <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-gray-200" strokeWidth="4"/>

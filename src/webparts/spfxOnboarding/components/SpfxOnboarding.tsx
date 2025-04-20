@@ -27,7 +27,11 @@ interface IUser {
 
 const Onboarding: React.FC<ISpfxOnboardingProps> = (props) => {
   const { trainingData, onboardingName } = props;
-  console.log("trainingData:", trainingData);
+  const modules = trainingData.data.modules;
+  const learningPathInfo = trainingData.data.learningPath;
+
+  // console.log("courses:", modules);
+  // console.log("learningPathInfo:", learningPathInfo);
 
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const [isUserInList, setIsUserInList] = useState(false);
@@ -158,7 +162,7 @@ const Onboarding: React.FC<ISpfxOnboardingProps> = (props) => {
   console.log("courses:", trainingData);
 
   // Get unique courses from the training data
-const uniqueCourses = trainingData.data.reduce((acc: any[], item: { course: string; coursePercentageComplete?: number }) => {
+const uniqueCourses = modules.reduce((acc: any[], item: { course: string; coursePercentageComplete?: number }) => {
   const exists = acc.find((i) => i.course === item.course);
   if (!exists) {
     acc.push({
@@ -177,7 +181,7 @@ const uniqueCourses = trainingData.data.reduce((acc: any[], item: { course: stri
           <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50" onClick={() => setIsCoursesBoardVisible(false)} >
             <CoursesBoard
               ref={popupRef} // Attach the popupRef to the CoursesBoard component
-              Courses={trainingData.data}
+              Courses={modules}
               handleTrainingDataClick={handleTrainingDataClick}
               selectedTraining={selectedTraining}
 
@@ -193,7 +197,7 @@ const uniqueCourses = trainingData.data.reduce((acc: any[], item: { course: stri
               <div className="text-xl font-medium w-[371px]">Complete these courses to finish your onboarding</div>
 
             </div>
-            <OnboardingListCourses uniqueCoursesNames={uniqueCourses} modules={trainingData} handleTrainingDataClick={(trainingObject: any) => handleTrainingDataClick(trainingObject)} />
+            <OnboardingListCourses uniqueCoursesNames={uniqueCourses} modules={modules} handleTrainingDataClick={(trainingObject: any) => handleTrainingDataClick(trainingObject)} />
           </div>
 
           {/* Right Side - Card and ProgressBar */}
@@ -204,7 +208,7 @@ const uniqueCourses = trainingData.data.reduce((acc: any[], item: { course: stri
             </div>
             {/* ProgressBar positioned on the corner */}
             <div className='absolute -translate-x-[44px] -translate-y-[86px] z-10 p-4 bg-white rounded-full'>
-              <ProgressBar PercentageComplete={40} />
+              <ProgressBar PercentageComplete={learningPathInfo.PercentageComplete} />
             </div>
           </div>
         </div>
