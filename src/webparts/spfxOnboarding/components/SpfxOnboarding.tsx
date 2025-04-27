@@ -7,24 +7,22 @@ import { useEffect, useState, useRef } from 'react';
 // import { AadHttpClient } from '@microsoft/sp-http';
 import CoursesBoard from './popup/CoursesBoard';
 
-interface IListItem {
-  Id: number;
-  Title: string;
-  field_2: string; // Assuming this is the field for email
-  field_17: string; // Assuming this is the field for the onboarding name
-  field_18: string; // Assuming this is the field for the course name
+// interface IListItem {
+//   Id: number;
+//   Title: string;
+//   field_3: string; // Assuming this is the field for email
+//   field_18: string; // Assuming this is the field for user principal name
+// }
 
-}
-
-interface IUser {
-  Id: number;
-  IsHiddenInUI: boolean;
-  LoginName: string;
-  Title: string;
-  PrincipalType: number;
-  Email: string;
-  UserPrincipalName: string;
-}
+// interface IUser {
+//   Id: number;
+//   IsHiddenInUI: boolean;
+//   LoginName: string;
+//   Title: string;
+//   PrincipalType: number;
+//   Email: string;
+//   UserPrincipalName: string;
+// }
 
 const Onboarding: React.FC<ISpfxOnboardingProps> = (props) => {
   const { trainingData } = props;
@@ -34,8 +32,8 @@ const Onboarding: React.FC<ISpfxOnboardingProps> = (props) => {
   // console.log("courses:", modules);
   // console.log("learningPathInfo:", learningPathInfo);
 
-  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
-  const [isUserInList, setIsUserInList] = useState(false);
+  // const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  // const [isUserInList, setIsUserInList] = useState(false);
 
   const [isCoursesBoardVisible, setIsCoursesBoardVisible] = useState(false);
 
@@ -93,74 +91,74 @@ const Onboarding: React.FC<ISpfxOnboardingProps> = (props) => {
   };
 
 
-  useEffect(() => {
-    fetchCurrentUser();
-  }, []);
+  // useEffect(() => {
+  //   fetchCurrentUser();
+  // }, []);
 
-  useEffect(() => {
-    if (currentUser) {
-      fetchHiresListData();
-    }
-  }, [currentUser]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     fetchHiresListData();
+  //   }
+  // }, [currentUser]);
 
   // fetch the curr user
-  const fetchCurrentUser = async () => {
-    const siteUrl = "https://mosh12.sharepoint.com/sites/test-ziv";
+  // const fetchCurrentUser = async () => {
+  //   const siteUrl = "https://mosh12.sharepoint.com/sites/test-ziv";
 
-    try {
-      const response = await fetch(`${siteUrl}/_api/web/currentuser`, {
-        method: "GET",
-        headers: {
-          "Accept": "application/json;odata=nometadata"
-        }
-      });
+  //   try {
+  //     const response = await fetch(`${siteUrl}/_api/web/currentuser`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Accept": "application/json;odata=nometadata"
+  //       }
+  //     });
 
-      const data = await response.json();
-      setCurrentUser(data);
-      console.log("Current User:", data);
+  //     const data = await response.json();
+  //     setCurrentUser(data);
+  //     console.log("Current User:", data);
 
-    } catch (error) {
-      console.error("Error fetching current user:", error);
-    }
-  };
+  //   } catch (error) {
+  //     console.error("Error fetching current user:", error);
+  //   }
+  // };
 
 
-  // fetch the hires list
-  const fetchHiresListData = async () => {
-    const siteUrl = "https://mosh12.sharepoint.com/sites/test-ziv";
-    const HiresListName = "New Hires assigned";
+  // // fetch the hires list
+  // const fetchHiresListData = async () => {
+  //   const siteUrl = "https://mosh12.sharepoint.com/sites/LearningPortal28";
+  //   const HiresListName = "onboarding_list";
 
-    try {
-      const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${HiresListName}')/items?$top=5000`, {
-        method: "GET",
-        headers: {
-          "Accept": "application/json;odata=nometadata"
-        }
-      });
+  //   try {
+  //     const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${HiresListName}')/items?$top=5000`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Accept": "application/json;odata=nometadata"
+  //       }
+  //     });
 
-      const hiresList = await response.json();
-      console.log("hiresList:", hiresList);
+  //     const hiresList = await response.json();
+  //     console.log("hiresList:", hiresList);
 
-      // check if the user in the list
-      const userFound = hiresList.value.some((item: IListItem) => {
-        if (!currentUser?.UserPrincipalName || !item.field_2) return false;
+  //     // check if the user in the list
+  //     const userFound = hiresList.value.some((item: IListItem) => {
+  //       if (!currentUser?.UserPrincipalName || !item.field_3) return false;
 
-        const currentUserPrefix = currentUser.UserPrincipalName.split('@')[0].toLowerCase();
-        const itemPrefix = item.field_2.split('@')[0].toLowerCase();
+  //       const currentUserPrefix = currentUser.UserPrincipalName.split('@')[0].toLowerCase();
+  //       const itemPrefix = item.field_3.split('@')[0].toLowerCase();
 
-        return currentUserPrefix === itemPrefix;
-      }
-      );
-      console.log("curruser:", currentUser);
+  //       return currentUserPrefix === itemPrefix;
+  //     }
+  //     );
+  //     console.log("curruser:", currentUser);
 
-      setIsUserInList(userFound);
-      console.log("Is user in list?", userFound);
+  //     setIsUserInList(userFound);
+  //     console.log("Is user in list?", userFound);
 
-    } catch (error) {
-      console.error("Error fetching list items:", error);
-    }
-  };
-  console.log("courses:", trainingData);
+  //   } catch (error) {
+  //     console.error("Error fetching list items:", error);
+  //   }
+  // };
+  // console.log("courses:", trainingData);
 
   // Get unique courses from the training data
 const uniqueCourses = modules.reduce((acc: any[], item: { course: string; coursePercentageComplete?: number }) => {
@@ -175,7 +173,7 @@ const uniqueCourses = modules.reduce((acc: any[], item: { course: string; course
 }, []);
 
   return (
-    <>{isUserInList && (
+    <>{trainingData && trainingData.data && (
       <div className='w-full max-w-[960px] mx-auto m-8'>
         {/* Popup showing the CoursesBoard component */}
         {isCoursesBoardVisible && (

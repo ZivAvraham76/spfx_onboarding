@@ -62,7 +62,7 @@ Loading...
 
           this.onboardingId = onboardingId;
   
-          // const fullUrl = encodeURI(`https://training-tools-portal-stg.checkpoint.com/sp-data/4sp/${onboardingName}`);
+          // const fullUrl = encodeURI(`https://training-tools-portal-stg.checkpoint.com/sp-data/4sp/${onboardingId}`);
           const fullUrl = encodeURI(`http://localhost:3000/sp-data/4sp/${onboardingId}`);
           console.log("📡 Fetching from:", fullUrl);
   
@@ -109,8 +109,8 @@ Loading...
   
 
   private async getUserOnboardingId(): Promise<string | null> {
-    const siteUrl = "https://mosh12.sharepoint.com/sites/test-ziv";
-    const listName = "New Hires assigned";
+    const siteUrl = "https://mosh12.sharepoint.com/sites/LearningPortal28";
+    const listName = "onboarding_list";
 
     try {
       const userRes = await fetch(`${siteUrl}/_api/web/currentuser`, {
@@ -124,24 +124,26 @@ Loading...
         headers: { "Accept": "application/json;odata=nometadata" }
       });
       const list = await listRes.json();
+      console.log("list:", list);
 
 
       const matched = list.value.find((item: any) => {
-        if (!currentUser?.UserPrincipalName || !item.field_2) return false;
+        if (!currentUser?.UserPrincipalName || !item.field_3) return false;
         const userPrefix = currentUser.UserPrincipalName.split('@')[0].toLowerCase();
-        const itemPrefix = item.field_2.split('@')[0].toLowerCase();
-        // console.log("userPrefix:", userPrefix);
-        // console.log("itemPrefix:", itemPrefix);
+        const itemPrefix = item.field_3.split('@')[0].toLowerCase();
+        console.log("userPrefix:", userPrefix);
+        console.log("itemPrefix:", itemPrefix);
 
-        console.log("item", item);
+        // console.log("item", item);
 
-  
+        console.log("userPrefix === itemPrefix:", userPrefix === itemPrefix);
+        // console.log("itemPrefix === userPrefix:", itemPrefix === userPrefix);
         return userPrefix === itemPrefix;
       });
 
-      console.log("onboardingId:", matched?.Onboardingid);
+      console.log("onboardingId:", matched?.field_18);
 
-      return matched?.Onboardingid || null;
+      return matched?.field_18 || null;
 
 
     } catch (error) {
