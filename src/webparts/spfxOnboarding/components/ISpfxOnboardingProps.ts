@@ -27,7 +27,7 @@ export interface ISpfxOnboardingProps {
   trainingData: any;
   description: string;
   backend_app_id: string;
-  onboardingName: string;
+  onboardingId: string;
   aadClient: AadHttpClient;
 }
 

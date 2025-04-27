@@ -12,6 +12,7 @@ interface IListItem {
   Title: string;
   field_2: string; // Assuming this is the field for email
   field_17: string; // Assuming this is the field for the onboarding name
+  field_18: string; // Assuming this is the field for the course name
 
 }
 
@@ -26,7 +27,7 @@ interface IUser {
 }
 
 const Onboarding: React.FC<ISpfxOnboardingProps> = (props) => {
-  const { trainingData, onboardingName } = props;
+  const { trainingData } = props;
   const modules = trainingData.data.modules;
   const learningPathInfo = trainingData.data.learningPath;
 
@@ -203,7 +204,7 @@ const uniqueCourses = modules.reduce((acc: any[], item: { course: string; course
           {/* Right Side - Card and ProgressBar */}
           <div className="relative w-[410px] h-[240px]">
             <div className="w-full h-full rounded-lg border-2 border-[#3E2639] flex items-center justify-center">
-              <div className="text-3xl font-bold font-Poppins text-center">{onboardingName}
+              <div className="text-3xl font-bold font-Poppins text-center">{learningPathInfo.Name}
               </div>
             </div>
             {/* ProgressBar positioned on the corner */}

@@ -34,7 +34,7 @@ export interface ISpfxOnboardingWebPartProps {
 export default class SpfxOnboardingWebPart extends BaseClientSideWebPart<ISpfxOnboardingWebPartProps> {
   private Client: AadHttpClient;
   private trainingData: any;
-  private onboardingName: string;
+  private onboardingId: string;
 
   public render(): void {
     if(!this.properties.backend_app_id){
@@ -53,17 +53,17 @@ export default class SpfxOnboardingWebPart extends BaseClientSideWebPart<ISpfxOn
 Loading...
 </button>
 </div>`;
-      this.getUserOnboardingName()
-        .then(onboardingName => {
-          if (!onboardingName) {
+      this.getUserOnboardingId()
+        .then(onboardingId => {
+          if (!onboardingId) {
             this.domElement.innerHTML = `<p>User not found in onboarding list</p>`;
             return;
           }
 
-          this.onboardingName = onboardingName;
+          this.onboardingId = onboardingId;
   
           // const fullUrl = encodeURI(`https://training-tools-portal-stg.checkpoint.com/sp-data/4sp/${onboardingName}`);
-          const fullUrl = encodeURI(`http://localhost:3000/sp-data/4sp/${onboardingName}`);
+          const fullUrl = encodeURI(`http://localhost:3000/sp-data/4sp/${onboardingId}`);
           console.log("📡 Fetching from:", fullUrl);
   
           return this.Client.get(fullUrl, AadHttpClient.configurations.v1);
@@ -99,7 +99,7 @@ Loading...
         description: this.properties.description,
         backend_app_id: this.properties.backend_app_id,
         trainingData: this.trainingData,
-        onboardingName: this.onboardingName,
+        onboardingId: this.onboardingId,
         aadClient: this.Client,
       }
     );
@@ -108,7 +108,7 @@ Loading...
   }
   
 
-  private async getUserOnboardingName(): Promise<string | null> {
+  private async getUserOnboardingId(): Promise<string | null> {
     const siteUrl = "https://mosh12.sharepoint.com/sites/test-ziv";
     const listName = "New Hires assigned";
 
@@ -125,17 +125,24 @@ Loading...
       });
       const list = await listRes.json();
 
+
       const matched = list.value.find((item: any) => {
         if (!currentUser?.UserPrincipalName || !item.field_2) return false;
         const userPrefix = currentUser.UserPrincipalName.split('@')[0].toLowerCase();
         const itemPrefix = item.field_2.split('@')[0].toLowerCase();
-        console.log("userPrefix:", userPrefix);
-        console.log("itemPrefix:", itemPrefix);
+        // console.log("userPrefix:", userPrefix);
+        // console.log("itemPrefix:", itemPrefix);
+
+        console.log("item", item);
+
   
         return userPrefix === itemPrefix;
       });
 
-      return matched?.field_17 || null;
+      console.log("onboardingId:", matched?.Onboardingid);
+
+      return matched?.Onboardingid || null;
+
 
     } catch (error) {
       console.error("Error checking onboarding list:", error);
